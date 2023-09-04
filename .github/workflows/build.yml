@@ -53,7 +53,7 @@ jobs:
 #        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "TestCICD/ExportOptions.plist" -allowProvisioningUpdates
 
       - name: Export IPAA
-        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "Export Options Plist" -allowProvisioningUpdates
+        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
 
       - name: List Files
         run: ls -lh
