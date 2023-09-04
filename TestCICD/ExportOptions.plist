@@ -8,11 +8,11 @@
         <string>app-store</string>
         <key>provisioningProfiles</key>
         <dict>
-            <key>8H4VCQCSWU.com.Tissatech.TestCICD</key>
+            <key>com.Tissatech.TestCICD</key>
             <string>f688cf76-ff7c-4f2c-ae85-97e5a342d983</string>
         </dict>
         <key>signingCertificate</key>
-        <string>Distribution</string>
+        <string>Apple Distribution</string>
         <key>signingStyle</key>
         <string>manual</string>
         <key>teamID</key>

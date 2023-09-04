@@ -49,8 +49,11 @@ jobs:
       - name: Build IPA
         run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGNING_ALLOWED=NO -allowProvisioningUpdates
         
-      - name: Export IPA
-        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "TestCICD/ExportOptions.plist" -allowProvisioningUpdates
+#      - name: Export IPA
+#        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "TestCICD/ExportOptions.plist" -allowProvisioningUpdates
+
+      - name: Export IPAA
+        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "Export Options Plist" -allowProvisioningUpdates
 
       - name: List Files
         run: ls -lh
