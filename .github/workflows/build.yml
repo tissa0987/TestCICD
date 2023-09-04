@@ -39,7 +39,7 @@ jobs:
       - name: Clean Project
         run: xcodebuild clean -workspace TestCICD.xcworkspace -scheme TestCICD
         
-      - name: Print Archive Location
+      - name: Print Archive Locationn
         run: |
           # Print the current working directory
           echo "Current Directory: $(pwd)"
