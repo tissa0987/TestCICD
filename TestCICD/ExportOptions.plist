@@ -12,7 +12,7 @@
             <string>f688cf76-ff7c-4f2c-ae85-97e5a342d983</string>
         </dict>
         <key>signingCertificate</key>
-        <string>Apple Distribution</string>
+        <string>Distribution</string>
         <key>signingStyle</key>
         <string>manual</string>
         <key>teamID</key>
