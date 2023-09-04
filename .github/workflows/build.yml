@@ -37,7 +37,7 @@ jobs:
           PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE}}
           
       - name: Clean Project
-        run: xcodebuild clean -workspace TestCICD.xcworkspace -scheme SampleCICD
+        run: xcodebuild clean -workspace TestCICD.xcworkspace -scheme TestCICD
         
       - name: Print Archive Location
         run: |
