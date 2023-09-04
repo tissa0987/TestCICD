@@ -55,7 +55,7 @@ jobs:
       - name: List Files
         run: ls -lh
 
-      - name: Install Transporterr
+      - name: Install Transporter
         run: brew install --cask transporter
 
       - name: Upload to TestFlight
