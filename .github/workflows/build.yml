@@ -52,7 +52,7 @@ jobs:
       - name: Export IPA
         run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "TestCICD/ExportOptions.plist" -allowProvisioningUpdates
 
-      - name: List Files
+      - name: List Filess
         run: ls -lh
 
       - name: Install Transporter
@@ -60,4 +60,3 @@ jobs:
 
       - name: Upload to TestFlight
         run: transporter upload -package SampleCICD.ipa -username ${{ secrets.APPLE_ID_USERNAME }} -password ${{ secrets.APP_SPECIFIC_PASSWORD }} -itc_provider ${{ secrets.ITC_TEAM_ID }}
-
