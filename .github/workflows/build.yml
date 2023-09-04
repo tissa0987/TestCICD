@@ -46,7 +46,7 @@ jobs:
           # Print the location of the archive
           echo "Archive Location: $(pwd)/TestCICD.xcarchive"
 
-      - name: Build IPAA
+      - name: Build IPA
         run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGNING_ALLOWED=NO -allowProvisioningUpdates
         
       - name: Export IPA
