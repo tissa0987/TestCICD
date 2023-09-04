@@ -19,12 +19,12 @@ jobs:
         
       - name: Print Bundle Identifier
         run: |
-         # Retrieve bundle identifier from Info.plist
-         bundle_identifier=$(defaults read $PWD/TestCICD/Info.plist CFBundleIdentifier)
-         echo "Bundle Identifier: $bundle_identifier"
-         echo "BUNDLE_IDENTIFIER=$bundle_identifier" >> $GITHUB_ENV
+          # Retrieve bundle identifier from Info.plist
+          bundle_identifier=$(defaults read $PWD/TestCICD/Info.plist CFBundleIdentifier)
+          echo "Bundle Identifier: $bundle_identifier"
+          echo "BUNDLE_IDENTIFIER=$bundle_identifier" >> $GITHUB_ENV
 
-      - name: Install CocoaPodss
+      - name: Install CocoaPods
         run: |
           gem install cocoapods
           pod install
@@ -34,7 +34,7 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           echo "$PROVISIONING_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/f688cf76-ff7c-4f2c-ae85-97e5a342d983.mobileprovision
         env:
-          PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE}}
+          PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
           
       - name: Clean Project
         run: xcodebuild clean -workspace TestCICD.xcworkspace -scheme TestCICD
@@ -49,26 +49,19 @@ jobs:
       - name: Build IPA
         run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGNING_ALLOWED=NO -allowProvisioningUpdates
         
-#      - name: Export IPA
-#        run: xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "TestCICD/ExportOptions.plist" -allowProvisioningUpdates
-
       - name: Export IPA
         run: |
-    # Create a temporary keychain and import the distribution certificate
-        security create-keychain -p "" temp.keychain
-        security import ./Certificates.p12 -P ${{ secrets.P12_PASSWORD }} -A -t cert -f pkcs12 -k ~/Library/Keychains/temp.keychain
-        security list-keychains -s ~/Library/Keychains/temp.keychain
-        security unlock-keychain -p "" ~/Library/Keychains/temp.keychain
+          # Create a temporary keychain and import the distribution certificate
+          security create-keychain -p "" temp.keychain
+          security import ./Certificates.p12 -P ${{ secrets.P12_PASSWORD }} -A -t cert -f pkcs12 -k ~/Library/Keychains/temp.keychain
+          security list-keychains -s ~/Library/Keychains/temp.keychain
+          security unlock-keychain -p "" ~/Library/Keychains/temp.keychain
 
- 
+          # Use the distribution certificate in the export
+          xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates -exportSigningIdentity "iPhone Distribution"
 
-    # Use the distribution certificate in the export
-        xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates -exportSigningIdentity "iPhone Distribution"
-
- 
-
-    # Delete the temporary keychain
-        security delete-keychain ~/Library/Keychains/temp.keychain
+          # Delete the temporary keychain
+          security delete-keychain ~/Library/Keychains/temp.keychain
         env:
           DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.P12_PASSWORD }}
 
