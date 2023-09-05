@@ -1,3 +1,91 @@
+#name: Automate iOS Build and TestFlight Upload
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  build_and_upload:
+#    name: Build and Upload
+#    runs-on: macos-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Install Xcode
+#        run: sudo xcode-select --switch /Applications/Xcode.app
+#
+#      - name: Print Bundle Identifier
+#        run: |
+#          # Retrieve bundle identifier from Info.plist
+#          bundle_identifier=$(defaults read $PWD/TestCICD/Info.plist CFBundleIdentifier)
+#          echo "Bundle Identifier: $bundle_identifier"
+#          echo "BUNDLE_IDENTIFIER=$bundle_identifier" >> $GITHUB_ENV
+#
+#      - name: Install CocoaPods
+#        run: |
+#          gem install cocoapods
+#          pod install
+#
+#      - name: Download and Install Provisioning Profile
+#        run: |
+#          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+#          echo "$PROVISIONING_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/07969a034-a393-4b52-badc-94cbd8f5dda2.mobileprovision
+#        env:
+#          PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
+#
+#      - name: Clean Project
+#        run: xcodebuild clean -workspace TestCICD.xcworkspace -scheme TestCICD
+#
+#      - name: Print Archive Location
+#        run: |
+#          # Print the current working directory
+#          echo "Current Directory: $(pwd)"
+#          # Print the location of the archive
+#          echo "Archive Location: $(pwd)/TestCICD.xcarchive"
+#
+#      - name: Build IPA
+#        run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGNING_ALLOWED=NO -allowProvisioningUpdates
+#
+#      - name: Download Export Options Plist
+#        run: curl -O -L "https://github.com/tissa0987/TestCICD/raw/main/TestCICD/ExportOptions.plist"
+#
+##      - name: Export IPA
+##        run: |
+##          # Create a temporary keychain and import the distribution certificate
+##          security create-keychain -p "" temp.keychain
+##          security import ./Certificates.p12 -P ${{ secrets.P12_PASSWORD }} -A -t cert -f pkcs12 -k ~/Library/Keychains/temp.keychain
+##          security list-keychains -s ~/Library/Keychains/temp.keychain
+##          security unlock-keychain -p "" ~/Library/Keychains/temp.keychain
+##
+##          # Export the archive
+##          xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
+##
+##          # Delete the temporary keychain
+##          security delete-keychain ~/Library/Keychains/temp.keychain
+##        env:
+##          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.P12_PASSWORD }}
+#
+#      - name: Export IPA
+#        run: |
+#          # Export the archive
+#          xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
+#        env:
+#          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.P12_PASSWORD }}
+#
+#
+#      - name: List Files
+#        run: ls -lh
+#
+#      - name: Install Transporter
+#        run: brew install --cask transporter
+#
+#      - name: Upload to TestFlight
+#        run: transporter upload -package "TestCICD/TestCICD.ipa" -username ${{ secrets.APPLE_ID_USERNAME }} -password ${{ secrets.APP_SPECIFIC_PASSWORD }} -itc_provider ${{ secrets.ITC_TEAM_ID }}
+
+
 name: Automate iOS Build and TestFlight Upload
 
 on:
@@ -47,34 +135,18 @@ jobs:
           echo "Archive Location: $(pwd)/TestCICD.xcarchive"
 
       - name: Build IPA
-        run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGNING_ALLOWED=NO -allowProvisioningUpdates
+        run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGN_IDENTITY="iPhone Distribution" PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE }}" CODE_SIGNING_REQUIRED=NO -allowProvisioningUpdates
+
         
       - name: Download Export Options Plist
         run: curl -O -L "https://github.com/tissa0987/TestCICD/raw/main/TestCICD/ExportOptions.plist"
         
-#      - name: Export IPA
-#        run: |
-#          # Create a temporary keychain and import the distribution certificate
-#          security create-keychain -p "" temp.keychain
-#          security import ./Certificates.p12 -P ${{ secrets.P12_PASSWORD }} -A -t cert -f pkcs12 -k ~/Library/Keychains/temp.keychain
-#          security list-keychains -s ~/Library/Keychains/temp.keychain
-#          security unlock-keychain -p "" ~/Library/Keychains/temp.keychain
-#
-#          # Export the archive
-#          xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
-#
-#          # Delete the temporary keychain
-#          security delete-keychain ~/Library/Keychains/temp.keychain
-#        env:
-#          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.P12_PASSWORD }}
-
       - name: Export IPA
         run: |
           # Export the archive
           xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
         env:
           DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.P12_PASSWORD }}
-
 
       - name: List Files
         run: ls -lh
