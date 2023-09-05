@@ -9,7 +9,7 @@
         <key>provisioningProfiles</key>
         <dict>
             <key>com.Tissatech.TestCICD</key>
-            <string>05a6238f-0440-4e84-a775-b68e3ad98cf5</string>
+            <string>7969a034-a393-4b52-badc-94cbd8f5dda2</string>
         </dict>
         <key>signingCertificate</key>
         <string>Apple Distribution</string>
