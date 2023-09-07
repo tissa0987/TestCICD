@@ -102,7 +102,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Xcode
+      - name: Install Xcodee
         run: sudo xcode-select --switch /Applications/Xcode.app
         
       - name: Print Bundle Identifier
