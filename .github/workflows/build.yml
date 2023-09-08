@@ -137,7 +137,7 @@ jobs:
           # Print the location of the archive
           echo "Archive Location: $(pwd)/TestCICD.xcarchive"
 
-      - name: Build IPA
+      - name: Build IPAA
         run: xcodebuild -workspace "TestCICD.xcworkspace" -scheme "TestCICD" -configuration Release clean archive -archivePath "TestCICD.xcarchive" CODE_SIGN_IDENTITY="iPhone Distribution" PROVISIONING_PROFILE_SPECIFIER="${{ secrets.PROVISIONING_PROFILE }}" CODE_SIGNING_REQUIRED=YES -allowProvisioningUpdates
 
         
