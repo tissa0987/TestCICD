@@ -252,7 +252,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Distribution: TISSA Technology (8H4VCQCSWU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TISSA Technology (8H4VCQCSWU)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -314,7 +314,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Distribution: TISSA Technology (8H4VCQCSWU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TISSA Technology (8H4VCQCSWU)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -344,10 +344,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Distribution: TISSA Technology (8H4VCQCSWU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: TISSA Technology (8H4VCQCSWU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TISSA Technology (8H4VCQCSWU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TISSA Technology (8H4VCQCSWU)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8H4VCQCSWU;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -379,10 +379,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Distribution: TISSA Technology (8H4VCQCSWU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: TISSA Technology (8H4VCQCSWU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TISSA Technology (8H4VCQCSWU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TISSA Technology (8H4VCQCSWU)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8H4VCQCSWU;
 				GENERATE_INFOPLIST_FILE = YES;

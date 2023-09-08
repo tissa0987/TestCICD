@@ -120,7 +120,7 @@ jobs:
       - name: Download and Install Provisioning Profile
         run: |
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          echo "$PROVISIONING_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/07969a034-a393-4b52-badc-94cbd8f5dda2.mobileprovision
+          echo "$PROVISIONING_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/b94bd239-39d8-49db-b178-f761a9ced945.mobileprovision
         env:
           PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
           
