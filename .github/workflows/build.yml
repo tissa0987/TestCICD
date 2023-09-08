@@ -86,6 +86,9 @@
 #        run: transporter upload -package "TestCICD/TestCICD.ipa" -username ${{ secrets.APPLE_ID_USERNAME }} -password ${{ secrets.APP_SPECIFIC_PASSWORD }} -itc_provider ${{ secrets.ITC_TEAM_ID }}
 
 
+
+
+
 name: Automate iOS Build and TestFlight Upload
 
 on:
@@ -141,7 +144,7 @@ jobs:
       - name: Download Export Options Plist
         run: curl -O -L "https://github.com/tissa0987/TestCICD/raw/main/TestCICD/ExportOptions.plist"
         
-      - name: Export IPA
+      - name: Export IPAA
         run: |
           # Export the archive
           xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
