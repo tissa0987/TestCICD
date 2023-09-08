@@ -144,7 +144,7 @@ jobs:
       - name: Download Export Options Plist
         run: curl -O -L "https://github.com/tissa0987/TestCICD/raw/main/TestCICD/ExportOptions.plist"
         
-      - name: Export IPAA
+      - name: Export IPA
         run: |
           # Export the archive
           xcodebuild -exportArchive -archivePath "TestCICD.xcarchive" -exportPath "TestCICD" -exportOptionsPlist "ExportOptions.plist" -allowProvisioningUpdates
