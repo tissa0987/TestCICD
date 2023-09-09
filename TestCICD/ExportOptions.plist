@@ -5,11 +5,11 @@
         <key>destination</key>
         <string>export</string>
         <key>method</key>
-        <string>app-store</string>
+        <string>adhoc</string>
         <key>provisioningProfiles</key>
         <dict>
             <key>com.Tissatech.TestCICD</key>
-            <string>bbc50fa5-9dce-43aa-ba10-a82613ada2b5</string>
+            <string>79d79fb5-a1b7-464b-9794-50b15dad1aa9</string>
         </dict>
         <key>signingCertificate</key>
         <string>iPhone Distribution</string>
